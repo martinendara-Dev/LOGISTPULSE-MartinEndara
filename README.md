@@ -70,6 +70,8 @@ See `docs/` for C4, data ownership, missions and incident runbooks.
 
 El equipo está formado por Martín Endara, Antonio Muñoz y Marco Bonilla. La base heredada corresponde a `randUSFQ/LOGISTPULSE-GOLDEN`, commit `74fe4cdbedb32c55a7848b35195229adc58578b6`. El aporte del equipo está en la rama `docs/value-recovery-lp` y comprende el backlog, el Sprint 1, el diagrama MVC, la matriz de trazabilidad, la prueba de extremo a extremo y estas instrucciones. BANKPULSE no forma parte de esta entrega.
 
+Repositorio del equipo: https://github.com/martinendara-Dev/LOGISTPULSE-MartinEndara. PR de HU-LP-01 a HU-LP-04: https://github.com/martinendara-Dev/LOGISTPULSE-MartinEndara/pull/1. El PR queda abierto hasta una revisión real de Antonio Muñoz o Marco Bonilla.
+
 El Sprint 1 cubre HU-LP-01 a HU-LP-04: crear un pedido, consultarlo y comprobar que el mismo `orderId` avanza de `WAITING` a `PREPARING` y `READY` mediante Redpanda y `fulfillment-worker`.
 
 - [Backlog y Sprint 1](docs/value-recovery/BACKLOG.md)
@@ -91,14 +93,14 @@ Copiar `.env.example` a `.env`. El archivo `.env` está ignorado por Git y no de
 | Variable | Uso | Valor de laboratorio |
 | --- | --- | --- |
 | `POSTGRES_USER` | Usuario de PostgreSQL | `logist` |
-| `POSTGRES_PASSWORD` | Clave local de PostgreSQL | `logist_demo` |
+| `POSTGRES_PASSWORD` | Clave local de PostgreSQL | Configurar solo en `.env`; no publicar |
 | `POSTGRES_HOST` | Host interno de PostgreSQL | `postgres` |
 | `POSTGRES_PORT` | Puerto interno de PostgreSQL | `5432` |
 | `MONGO_URI` | Conexión interna a MongoDB | `mongodb://mongo:27017` |
 | `MQTT_HOST` / `MQTT_PORT` | Broker MQTT interno | `mosquitto` / `1883` |
 | `KAFKA_BOOTSTRAP` | Broker Kafka compatible | `redpanda:9092` |
 | `GF_SECURITY_ADMIN_USER` | Usuario local de Grafana | `admin` |
-| `GF_SECURITY_ADMIN_PASSWORD` | Clave local de Grafana | `logistpulse_demo` |
+| `GF_SECURITY_ADMIN_PASSWORD` | Clave local de Grafana | Configurar solo en `.env`; no publicar |
 
 ### Estructura relevante
 
@@ -131,6 +133,8 @@ En Linux o macOS, sustituir la primera línea por `cp .env.example .env`. La con
 - `GET /api/fulfillment/orders`
 
 La prueba escribe `evidencias/sprint1.json`. El resultado solo se considera aprobado cuando el archivo registra `PASS`, un `POST` con HTTP 201 y la secuencia del mismo identificador `WAITING`, `PREPARING`, `READY`.
+
+La ejecución verificada del 05 de octubre de 2026 sobre el commit `370b8dd90a637546400304ba63161fbbc0b85d4b` produjo el pedido `ORD-656EE9` y terminó en `PASS`. Tras recrear los contenedores sin borrar volúmenes, el API y PostgreSQL conservaron ese pedido en `READY`.
 
 Para revisar fallos:
 

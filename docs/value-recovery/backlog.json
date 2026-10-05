@@ -1,6 +1,7 @@
 {
   "project": "LOGISTPULSE",
-  "repo": "PENDIENTE: repositorio propio del equipo",
+  "repo": "https://github.com/martinendara-Dev/LOGISTPULSE-MartinEndara",
+  "pull_request": "https://github.com/martinendara-Dev/LOGISTPULSE-MartinEndara/pull/1",
   "base": "74fe4cdbedb32c55a7848b35195229adc58578b6",
   "source": "PDF inicial: secciones 2.1–2.4. Plantilla original randUSFQ/LOGISTPULSE-GOLDEN.",
   "goal": "Crear un pedido ficticio, consultarlo y demostrar su procesamiento automático hasta READY.",
@@ -20,7 +21,7 @@
       "Must",
       2,
       "—",
-      "Código base existente; prueba pendiente"
+      "Verificada en Docker; T-LP-01 PASS; pedido ORD-656EE9"
     ],
     [
       "02",
@@ -30,7 +31,7 @@
       "Must",
       1,
       "01",
-      "Código base existente; consulta en PDF"
+      "Verificada en Docker; T-LP-02 PASS"
     ],
     [
       "03",
@@ -40,7 +41,7 @@
       "Must",
       2,
       "01",
-      "Código base existente; integración pendiente"
+      "Verificada en Docker; T-LP-03 PASS"
     ],
     [
       "04",
@@ -50,7 +51,7 @@
       "Must",
       2,
       "02,03",
-      "Código base existente; secuencia pendiente"
+      "Verificada en Docker; T-LP-04 PASS"
     ],
     [
       "05",

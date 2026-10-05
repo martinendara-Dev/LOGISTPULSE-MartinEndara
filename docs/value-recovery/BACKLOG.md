@@ -8,25 +8,25 @@ MoSCoW: Must obligatorio, Should importante, Could ampliación. Puntos relativos
 Como operador, quiero crear un pedido, para iniciar su preparación.
 
 Aceptación: POST /api/fulfillment/orders con storeId, channel y total: 201, orderId y estado inicial WAITING.
-Origen: LP-01 / LP-02; prioridad Must; 2 puntos; depende de —. Estado: Código base existente; prueba pendiente.
+Origen: LP-01 / LP-02; prioridad Must; 2 puntos; depende de —. Estado: Verificada en Docker, `T-LP-01 PASS`.
 
 ## HU-LP-02
 Como operador, quiero consultar pedidos recientes, para identificar el que registré.
 
 Aceptación: GET /api/fulfillment/orders: 200; máximo 20 pedidos, del más reciente al más antiguo; contiene el orderId creado.
-Origen: LP-03; prioridad Must; 1 puntos; depende de 01. Estado: Código base existente; consulta en PDF.
+Origen: LP-03; prioridad Must; 1 punto; depende de 01. Estado: Verificada en Docker, `T-LP-02 PASS`.
 
 ## HU-LP-03
 Como responsable de cocina, quiero recibir pedidos nuevos, para iniciar su procesamiento.
 
 Aceptación: Con broker y worker disponibles, ORDER_CREATED se publica en logistpulse.orders y el worker actualiza el mismo orderId a PREPARING.
-Origen: LP-04; prioridad Must; 2 puntos; depende de 01. Estado: Código base existente; integración pendiente.
+Origen: LP-04; prioridad Must; 2 puntos; depende de 01. Estado: Verificada en Docker, `T-LP-03 PASS`.
 
 ## HU-LP-04
 Como operador, quiero observar el avance del pedido, para saber cuándo está listo.
 
 Aceptación: En laboratorio sin cola previa, el mismo id pasa WAITING → PREPARING → READY en ≤ 60 s; cada consulta refleja su estado guardado.
-Origen: LP-05; prioridad Must; 2 puntos; depende de 02,03. Estado: Código base existente; secuencia pendiente.
+Origen: LP-05; prioridad Must; 2 puntos; depende de 02,03. Estado: Verificada en Docker, `T-LP-04 PASS`.
 
 ## HU-LP-05
 Como operador, quiero rechazar totales negativos, para evitar pedidos incorrectos.
@@ -68,7 +68,7 @@ Origen: LP-16 / LP-17; prioridad Could; 1 puntos; depende de 01. Estado: Propues
 Crear un pedido ficticio, consultarlo y demostrar su procesamiento automático hasta READY.
 Historias: HU-LP-01, HU-LP-02, HU-LP-03, HU-LP-04; 7 puntos. Duración: una semana. Capacidad propuesta para LOGISTPULSE: 18 horas de trabajo total; tres integrantes con 6 horas disponibles cada uno. Confirmar disponibilidad.
 Roles propuestos: PO Martín Endara; SM Antonio Muñoz; desarrollo Martín, Antonio y Marco Bonilla.
-Definition of Done: criterios verificados en el stack original, evidencia guardada, README y matriz actualizados, PR revisado/comentado por otro integrante y fusionado, sin secretos. El código heredado se distingue del aporte nuevo.
+Definition of Done: criterios verificados en el stack original, evidencia guardada, README y matriz actualizados, PR revisado/comentado por otro integrante y fusionado, sin secretos. El código heredado se distingue del aporte nuevo. Estado al cierre técnico: aceptación, evidencia y documentación completas; revisión humana y fusión pendientes.
 
 ## Tareas técnicas
 - HU-01: identificar contrato y probar creación; Marco, 2 h.
