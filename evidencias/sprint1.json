@@ -1,0 +1,91 @@
+{
+  "project": "LOGISTPULSE",
+  "date": "2026-10-05T19:44:55.995301+00:00",
+  "base": "http://localhost:8080",
+  "steps": [
+    {
+      "test": "SALUD-LP",
+      "result": "PASS",
+      "response": {
+        "http": 200,
+        "body": {
+          "status": "UP",
+          "service": "fulfillment-api"
+        }
+      }
+    },
+    {
+      "test": "T-LP-01",
+      "result": "PASS",
+      "response": {
+        "http": 201,
+        "body": {
+          "orderId": "ORD-656EE9",
+          "status": "WAITING"
+        }
+      }
+    },
+    {
+      "test": "T-LP-02",
+      "result": "PASS",
+      "response": {
+        "http": 200,
+        "body": [
+          {
+            "orderId": "ORD-656EE9",
+            "storeId": "VRJ-3fd653a7",
+            "channel": "MOBILE",
+            "total": 18.5,
+            "status": "PREPARING",
+            "createdAt": 1791229496.17556,
+            "updatedAt": 1791229496.34382
+          },
+          {
+            "orderId": "ORD-1A7059",
+            "storeId": "VRJ-8945c37e",
+            "channel": "MOBILE",
+            "total": 18.5,
+            "status": "READY",
+            "createdAt": 1791228923.83297,
+            "updatedAt": 1791228927.96918
+          }
+        ]
+      }
+    },
+    {
+      "test": "T-LP-03",
+      "result": "PASS",
+      "response": {
+        "orderId": "ORD-656EE9",
+        "observed": [
+          "WAITING",
+          "PREPARING",
+          "READY"
+        ]
+      }
+    },
+    {
+      "test": "T-LP-04",
+      "result": "PASS",
+      "response": {
+        "orderId": "ORD-656EE9",
+        "observed": [
+          "WAITING",
+          "PREPARING",
+          "READY"
+        ],
+        "polls": [
+          {
+            "state": "PREPARING",
+            "updatedAt": "1791229496.34382"
+          },
+          {
+            "state": "READY",
+            "updatedAt": "1791229500.35969"
+          }
+        ]
+      }
+    }
+  ],
+  "result": "PASS"
+}

@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build and start LOGISTPULSE
-        run: docker compose up -d --build
+        run: docker compose up -d --build --wait
       - name: Wait and smoke test
         run: |
           for i in $(seq 1 60); do if curl -fsS http://localhost:8080/ >/dev/null 2>&1; then break; fi; sleep 3; done

@@ -1,0 +1,119 @@
+{
+  "project": "LOGISTPULSE",
+  "repo": "https://github.com/martinendara-Dev/LOGISTPULSE-MartinEndara",
+  "pull_request": "https://github.com/martinendara-Dev/LOGISTPULSE-MartinEndara/pull/1",
+  "base": "74fe4cdbedb32c55a7848b35195229adc58578b6",
+  "source": "PDF inicial: secciones 2.1–2.4. Plantilla original randUSFQ/LOGISTPULSE-GOLDEN.",
+  "goal": "Crear un pedido ficticio, consultarlo y demostrar su procesamiento automático hasta READY.",
+  "selected": [
+    "01",
+    "02",
+    "03",
+    "04"
+  ],
+  "points": 7,
+  "stories": [
+    [
+      "01",
+      "Como operador, quiero crear un pedido, para iniciar su preparación.",
+      "POST /api/fulfillment/orders con storeId, channel y total: 201, orderId y estado inicial WAITING.",
+      "LP-01 / LP-02",
+      "Must",
+      2,
+      "—",
+      "Verificada en Docker; T-LP-01 PASS; pedido ORD-656EE9"
+    ],
+    [
+      "02",
+      "Como operador, quiero consultar pedidos recientes, para identificar el que registré.",
+      "GET /api/fulfillment/orders: 200; máximo 20 pedidos, del más reciente al más antiguo; contiene el orderId creado.",
+      "LP-03",
+      "Must",
+      1,
+      "01",
+      "Verificada en Docker; T-LP-02 PASS"
+    ],
+    [
+      "03",
+      "Como responsable de cocina, quiero recibir pedidos nuevos, para iniciar su procesamiento.",
+      "Con broker y worker disponibles, ORDER_CREATED se publica en logistpulse.orders y el worker actualiza el mismo orderId a PREPARING.",
+      "LP-04",
+      "Must",
+      2,
+      "01",
+      "Verificada en Docker; T-LP-03 PASS"
+    ],
+    [
+      "04",
+      "Como operador, quiero observar el avance del pedido, para saber cuándo está listo.",
+      "En laboratorio sin cola previa, el mismo id pasa WAITING → PREPARING → READY en ≤ 60 s; cada consulta refleja su estado guardado.",
+      "LP-05",
+      "Must",
+      2,
+      "02,03",
+      "Verificada en Docker; T-LP-04 PASS"
+    ],
+    [
+      "05",
+      "Como operador, quiero rechazar totales negativos, para evitar pedidos incorrectos.",
+      "Total negativo: respuesta 422 o 400 explicando el error y ningún pedido nuevo.",
+      "LP-08",
+      "Should",
+      1,
+      "01",
+      "Pendiente; el modelo base no valida positividad"
+    ],
+    [
+      "06",
+      "Como operador, quiero una confirmación con id, para reconocer el pedido creado.",
+      "Después de crear, la pantalla muestra el orderId y una confirmación del estado inicial.",
+      "LP-07",
+      "Should",
+      1,
+      "01",
+      "Propuesto; la Vista debe ampliarse"
+    ],
+    [
+      "07",
+      "Como operador, quiero etiquetas claras de estado, para entender el avance sin depender del color.",
+      "WAITING, PREPARING y READY se presentan como En espera, En preparación y Listo, siempre con texto.",
+      "LP-09 / LP-15",
+      "Should",
+      1,
+      "02",
+      "Propuesto; la Vista usa etiquetas técnicas"
+    ],
+    [
+      "08",
+      "Como operador, quiero actualizar el listado y reconocer errores, para consultar información vigente.",
+      "Actualizar muestra hora de consulta; una lista vacía y una falla presentan mensajes distintos.",
+      "LP-10 / LP-12 / LP-14",
+      "Should",
+      2,
+      "02",
+      "Propuesto; prueba UI pendiente"
+    ],
+    [
+      "09",
+      "Como supervisor, quiero recuperar pedidos sin procesar, para evitar que queden olvidados.",
+      "Si la publicación falla, el pedido sigue consultable y un mecanismo de recuperación lo procesa sin crear otro id.",
+      "LP-11",
+      "Could",
+      3,
+      "01,03",
+      "Pendiente; no existe recuperación garantizada"
+    ],
+    [
+      "10",
+      "Como operador, quiero bloquear el botón mientras envío, para evitar solicitudes repetidas.",
+      "Mientras hay una creación pendiente, el botón no permite otro envío; ante respuesta perdida advierte consultar antes de repetir.",
+      "LP-16 / LP-17",
+      "Could",
+      1,
+      "01",
+      "Propuesto; no hay idempotencia de pedidos"
+    ]
+  ],
+  "branch": "docs/value-recovery-lp",
+  "origin_map": "INC-LP-01: incepción 2.1 del PDF inicial. TEC-LP-01/02/03: análisis documental, escenarios y prototipado de sus secciones 2.2/2.3/2.4. Los hallazgos BP/LP mantienen los IDs del documento del equipo."
+}

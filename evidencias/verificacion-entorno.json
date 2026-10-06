@@ -1,0 +1,27 @@
+{
+  "project": "LOGISTPULSE",
+  "date": "2026-10-05T19:44:55.995301+00:00",
+  "timezone": "America/Guayaquil",
+  "testedCommit": "370b8dd90a637546400304ba63161fbbc0b85d4b",
+  "tools": {
+    "git": "2.53.0.windows.2",
+    "docker": "29.8.1",
+    "dockerCompose": "5.5.1",
+    "githubCli": "2.102.0"
+  },
+  "checks": {
+    "composeConfig": "PASS",
+    "buildAndStart": "PASS",
+    "containerHealth": "PASS",
+    "apiHealth": "PASS",
+    "smoke": "PASS",
+    "persistenceAfterComposeDownUp": "PASS"
+  },
+  "persistence": {
+    "orderId": "ORD-656EE9",
+    "apiStatusAfterRestart": "READY",
+    "postgresRowAfterRestart": "ORD-656EE9|READY",
+    "volumesDeleted": false
+  },
+  "notes": "No se guardan variables de entorno ni credenciales en esta evidencia. BANKPULSE queda fuera del alcance."
+}
